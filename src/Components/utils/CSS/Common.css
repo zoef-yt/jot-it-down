@@ -1,0 +1,29 @@
+.app {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 8rem 1fr 5rem;
+	grid-template-areas:
+		' header '
+		' main-content '
+		' footer  ';
+	margin: auto;
+	height: 100vh;
+	width: 100%;
+	max-width: 170rem;
+}
+
+.app-content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 4rem;
+	align-items: center;
+	grid-area: main-content;
+}
+
+.app-footer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	grid-area: footer;
+}
