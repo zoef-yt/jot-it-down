@@ -1,0 +1,11 @@
+.body-left-nav {
+	grid-area: sidebar;
+}
+
+.showcase-list-item {
+	font-size: 3rem;
+}
+
+.nav-li {
+	margin: 2rem;
+}

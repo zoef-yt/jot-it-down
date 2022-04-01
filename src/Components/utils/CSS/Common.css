@@ -1,11 +1,11 @@
 .app {
 	display: grid;
-	grid-template-columns: 1fr;
+	grid-template-columns: 20rem 1fr;
 	grid-template-rows: 8rem 1fr 5rem;
 	grid-template-areas:
-		' header '
-		' main-content '
-		' footer  ';
+		'header header '
+		'sidebar main-content '
+		' footer footer  ';
 	margin: auto;
 	height: 100vh;
 	width: 100%;
@@ -26,4 +26,11 @@
 	justify-content: center;
 	align-items: center;
 	grid-area: footer;
+}
+
+.text-field {
+	margin: 0;
+	max-width: 20vw;
+	width: 100%;
+	transition: all 0.3s ease-in-out;
 }
