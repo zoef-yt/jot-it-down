@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { LandingPage, Header, Footer, NotesPage, Sidebar, ArchivePage, TrashPage } from './Components/index';
+import { LandingPage, Header, Footer, NotesPage, Sidebar, ArchivePage, TrashPage } from './Components/';
 import Mockman from 'mockman-js';
 import './Components/utils/CSS/Common.css';
 
