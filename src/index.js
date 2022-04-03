@@ -5,7 +5,6 @@ import App from './App';
 import { AllProvider } from './context/AllProvider';
 import { makeServer } from './server';
 
-// Call make Server
 makeServer();
 
 ReactDOM.render(
