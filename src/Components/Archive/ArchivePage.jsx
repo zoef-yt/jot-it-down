@@ -2,8 +2,8 @@ import React from 'react';
 import { useArchive, useNotes, useTrash } from '../../context/';
 
 const ArchivePage = () => {
-	const { archiveNotes, deleteArchiveNotes, archiveToNotes } = useArchive();
-	const { archiveToTrash } = useTrash();
+	const { archiveNotes, deleteArchiveNotes, sendArchiveToNotes } = useArchive();
+	const { sendArchiveToTrash } = useTrash();
 	const { getNotes } = useNotes();
 	return (
 		<div className='app-content'>
@@ -23,7 +23,7 @@ const ArchivePage = () => {
 								<button
 									onClick={() => {
 										deleteArchiveNotes(note._id);
-										archiveToTrash(note);
+										sendArchiveToTrash(note);
 									}}
 									className='btn btn-secondary '
 								>
@@ -31,7 +31,7 @@ const ArchivePage = () => {
 								</button>
 								<button
 									onClick={() => {
-										archiveToNotes(note._id);
+										sendArchiveToNotes(note._id);
 										getNotes();
 									}}
 									className='btn btn-secondary '

@@ -5,7 +5,6 @@ const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
 	const [user, setUser] = useState(null);
-	const [encodedToken, setEncodedToken] = useState(null);
 	const { response: authResponse, operation: authFetch } = useAxios();
 	useEffect(() => {
 		if (user === null) {
@@ -19,14 +18,11 @@ const AuthProvider = ({ children }) => {
 			});
 		}
 		if (authResponse != undefined) {
-			setUser((prev) => authResponse);
+			setUser(authResponse);
 			localStorage.setItem('token', JSON.stringify(authResponse.encodedToken));
 		}
-		if (user != null) {
-			setEncodedToken(user.encodedToken);
-		}
 	}, [authResponse]);
-	return <AuthContext.Provider value={{ user, encodedToken }}>{children}</AuthContext.Provider>;
+	return <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>;
 };
 
 const useAuth = () => useContext(AuthContext);

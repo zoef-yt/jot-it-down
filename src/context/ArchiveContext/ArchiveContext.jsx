@@ -5,29 +5,28 @@ const ArchiveContext = createContext();
 
 const ArchiveProvider = ({ children }) => {
 	const [archiveNotes, setArchiveNotes] = useState([]);
-	const { response: archiveResponse, operation: fetchArchive } = useAxios();
+	const { response: archiveResponse, operation: archiveOperation } = useAxios();
 
 	useEffect(() => {
-		if (archiveResponse != null) {
-			if (archiveResponse.archives) {
-				setArchiveNotes(archiveResponse.archives);
-			}
+		if (archiveResponse != null && archiveResponse.archives) {
+			setArchiveNotes(archiveResponse.archives);
 		} else {
 			getArchive();
 		}
 	}, [archiveResponse]);
+
 	const getArchive = () => {
-		fetchArchive({
+		archiveOperation({
 			method: 'GET',
 			url: '/api/archives',
 			headers: {
-				authorization:
-					'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI0OGJmMzFiYi1iYWQyLTQ3N2EtYmRhNy1kZDc4NDIxNDZhODgiLCJlbWFpbCI6ImFkYXJzaGJhbGlrYUBnbWFpbC5jb20ifQ.kH6xXhMMvQ0sgsCz7e8vrSh1pVddplgC3IMzUSlTFsQ',
+				authorization: localStorage.getItem('token'),
 			},
 		});
 	};
-	const notesToArchive = (noteId, notes) => {
-		fetchArchive({
+
+	const sendNotesToArchive = (noteId, notes) => {
+		archiveOperation({
 			method: 'POST',
 			url: `/api/notes/archives/${noteId}`,
 			data: {
@@ -40,7 +39,7 @@ const ArchiveProvider = ({ children }) => {
 	};
 
 	const deleteArchiveNotes = (noteId) => {
-		fetchArchive({
+		archiveOperation({
 			method: 'DELETE',
 			url: `/api/archives/delete/${noteId}`,
 			headers: {
@@ -49,8 +48,8 @@ const ArchiveProvider = ({ children }) => {
 		});
 	};
 
-	const archiveToNotes = (notesId) => {
-		fetchArchive({
+	const sendArchiveToNotes = (notesId) => {
+		archiveOperation({
 			method: 'POST',
 			url: `/api/archives/restore/${notesId}`,
 			headers: {
@@ -60,7 +59,7 @@ const ArchiveProvider = ({ children }) => {
 	};
 
 	return (
-		<ArchiveContext.Provider value={{ archiveNotes, notesToArchive, getArchive, archiveToNotes, deleteArchiveNotes }}>
+		<ArchiveContext.Provider value={{ archiveNotes, sendNotesToArchive, getArchive, sendArchiveToNotes, deleteArchiveNotes }}>
 			{children}
 		</ArchiveContext.Provider>
 	);

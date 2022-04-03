@@ -6,7 +6,7 @@ function Sidebar() {
 	return (
 		<div className='body-left-nav'>
 			<ul className='showcase-list-group'>
-				<LinkItem to='/' name='Home' />
+				<LinkItem to='/' name='Notes' />
 				<LinkItem to='/archive' name='Archive' />
 				<LinkItem to='/trash' name='Trash' />
 			</ul>

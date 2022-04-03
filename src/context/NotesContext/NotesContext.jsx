@@ -8,10 +8,8 @@ const NotesProvider = ({ children }) => {
 	const { response: notesResponse, operation: fetchNotes } = useAxios();
 
 	useEffect(() => {
-		if (notesResponse != null) {
-			if (notesResponse.notes) {
-				setNotes(notesResponse.notes);
-			}
+		if (notesResponse != null && notesResponse.notes) {
+			setNotes(notesResponse.notes);
 		} else {
 			getNotes();
 		}

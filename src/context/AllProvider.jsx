@@ -4,15 +4,15 @@ import { TrashProvider } from './TrashContext/TrashContext';
 
 const AllProvider = ({ children }) => {
 	return (
-		<AuthProvider>
-			<ThemeProvider>
+		<ThemeProvider>
+			<AuthProvider>
 				<NotesProvider>
 					<ArchiveProvider>
 						<TrashProvider>{children}</TrashProvider>
 					</ArchiveProvider>
 				</NotesProvider>
-			</ThemeProvider>
-		</AuthProvider>
+			</AuthProvider>
+		</ThemeProvider>
 	);
 };
 

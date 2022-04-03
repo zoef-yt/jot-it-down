@@ -5,7 +5,7 @@ import { formatDate } from '../../backend/utils/authUtils';
 const NotesPage = () => {
 	const { user, encodedToken } = useAuth();
 	const { notes, postNotes, getNotes } = useNotes();
-	const { notesToArchive } = useArchive();
+	const { sendNotesToArchive } = useArchive();
 	const [textField, setTextField] = useState({ title: '', body: '' });
 	const submitNote = () => {
 		postNotes({
@@ -41,7 +41,7 @@ const NotesPage = () => {
 								</li>
 								<button
 									onClick={() => {
-										notesToArchive(note._id, note);
+										sendNotesToArchive(note._id, note);
 										getNotes();
 									}}
 									className='btn btn-secondary '

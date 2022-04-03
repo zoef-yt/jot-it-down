@@ -5,7 +5,7 @@ const TrashContext = createContext();
 
 const TrashProvider = ({ children }) => {
 	const [trashNotes, setTrashNotes] = useState([]);
-	const archiveToTrash = (notes) => {
+	const sendArchiveToTrash = (notes) => {
 		setTrashNotes([...trashNotes, notes]);
 	};
 
@@ -13,7 +13,7 @@ const TrashProvider = ({ children }) => {
 	const deleteTrashNotes = (noteId) => {
 		setTrashNotes((prev) => prev.filter((note) => note._id !== noteId));
 	};
-	return <TrashContext.Provider value={{ trashNotes, archiveToTrash, deleteTrashNotes }}>{children}</TrashContext.Provider>;
+	return <TrashContext.Provider value={{ trashNotes, sendArchiveToTrash, deleteTrashNotes }}>{children}</TrashContext.Provider>;
 };
 
 const useTrash = () => useContext(TrashContext);
