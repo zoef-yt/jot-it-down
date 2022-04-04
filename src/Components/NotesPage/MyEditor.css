@@ -31,7 +31,16 @@
 
 .my-editor {
 	width: 100%;
+	padding: 1rem;
 	max-width: 60rem;
+}
+
+.my-editor label input {
+	margin-bottom: 1rem;
+}
+
+.my-editor > * {
+	margin: 1rem 0;
 }
 
 .rdw-editor-toolbar > div {

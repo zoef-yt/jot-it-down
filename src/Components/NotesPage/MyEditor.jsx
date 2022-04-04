@@ -17,8 +17,22 @@ const MyEditor = ({ editorState, onEditorStateChange }) => {
 					trigger: '#',
 				}}
 				toolbar={{
-					options: ['inline', 'list', 'textAlign', 'history', 'link'],
+					// options: ['inline', 'list', 'textAlign', 'history', 'link'],
+					options: ['inline', 'textAlign', 'history', 'link', 'image'],
 					inline: { inDropdown: false, options: ['bold', 'italic', 'underline', 'strikethrough'] },
+					image: {
+						urlEnabled: true,
+						uploadEnabled: true,
+						alignmentEnabled: true,
+						uploadCallback: undefined,
+						previewImage: false,
+						inputAccept: 'image/gif,image/jpeg,image/jpg,image/png,image/svg',
+						alt: { present: false, mandatory: false },
+						defaultSize: {
+							height: 'auto',
+							width: 'auto',
+						},
+					},
 					list: { inDropdown: false },
 					textAlign: { inDropdown: false },
 					history: { inDropdown: false },
@@ -27,4 +41,5 @@ const MyEditor = ({ editorState, onEditorStateChange }) => {
 		</div>
 	);
 };
+
 export { MyEditor };
