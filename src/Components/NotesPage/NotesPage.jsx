@@ -78,20 +78,20 @@ const NotesPage = () => {
 			{notes.length > 0 ? (
 				<div>
 					{notes.map((note) => {
-						const { _id, body, createdAt, tags } = note;
+						const { _id, body, createdAt, tags, title } = note;
 						return (
-							<div className='card ' key={note._id}>
-								<h3>{note.title}</h3>
-								<div style={{ width: '100%' }} className=' rdw-editor-main' dangerouslySetInnerHTML={{ __html: note.body }}></div>
-								<p>{note.createdAt}</p>
+							<div className='card ' key={_id}>
+								<h3>{title}</h3>
+								<div style={{ width: '100%' }} className=' rdw-editor-main' dangerouslySetInnerHTML={{ __html: body }}></div>
+								<p>{createdAt}</p>
 								<li>
-									{note.tags.map((tag) => {
+									{tags.map((tag) => {
 										return <span key={tag}>{tag}</span>;
 									})}
 								</li>
 								<button
 									onClick={() => {
-										sendNotesToArchive(note._id, note);
+										sendNotesToArchive(_id, note);
 										getNotes();
 									}}
 									className='btn btn-secondary '
