@@ -1,0 +1,70 @@
+.editor-class {
+	background-color: var(--colour-black-third);
+	color: var(--colour-text-white);
+	display: block;
+	border-radius: 0 0 1rem 1rem;
+	outline: 1px solid var(--colour-primary-second);
+	padding: 0 1rem;
+	max-height: 20rem;
+	overflow: auto;
+}
+
+.rdw-link-decorator-wrapper {
+	color: var(--colour-secondary);
+}
+
+.rdw-link-decorator-wrapper:hover {
+	color: var(--colour-primary);
+}
+
+.toolbar-class {
+	border-radius: 1rem 1rem 0 0;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	padding: 0;
+	background-color: var(--colour-primary-second);
+	margin: 0;
+	border: 1px solid var(--colour-primary-second);
+	box-shadow: none;
+}
+
+.my-editor {
+	width: 100%;
+	padding: 1rem;
+	max-width: 60rem;
+}
+
+.my-editor label input {
+	margin-bottom: 1rem;
+}
+
+.my-editor > * {
+	margin: 1rem 0;
+}
+
+.rdw-editor-toolbar > div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 1rem 0.2rem;
+	margin: 0;
+	box-shadow: none;
+}
+
+.my-editor .rdw-option-wrapper {
+	background-color: transparent;
+	border-color: var(--colour-primary);
+	border-radius: 5px;
+	padding: 9px;
+}
+
+.my-editor .rdw-option-wrapper:hover {
+	background-color: var(--colour-accent-one);
+	box-shadow: none;
+}
+
+.my-editor .rdw-option-active {
+	background-color: var(--colour-accent-one);
+	box-shadow: none;
+}
