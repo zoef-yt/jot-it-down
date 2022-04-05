@@ -2,7 +2,7 @@ import React from 'react';
 
 function CreateNewIcon(props) {
 	return (
-		<svg width='1em' height='1em' viewBox='0 0 26 26' {...props}>
+		<svg width='25' height='25' viewBox='0 0 26 26' {...props}>
 			<path
 				fill='currentColor'
 				d='M22.438-.063c-.375 0-.732.17-1.032.47l-.718.687l4.218 4.218l.688-.718c.6-.6.6-1.494 0-2.094L23.5.406c-.3-.3-.688-.469-1.063-.469zM20 1.688l-1.094.907l4.5 4.5l1-1L20 1.687zm-1.688 1.625l-9.03 8.938a.975.975 0 0 0-.126.125l-.062.031a.975.975 0 0 0-.219.438l-1.219 4.281a.975.975 0 0 0 1.219 1.219l4.281-1.219a.975.975 0 0 0 .656-.531l8.876-8.782L21 6v.094l-1.188-1.188h.094l-1.593-1.593zM.813 4A1 1 0 0 0 0 5v20a1 1 0 0 0 1 1h20a1 1 0 0 0 1-1V14a1 1 0 1 0-2 0v10H2V6h10a1 1 0 1 0 0-2H1a1 1 0 0 0-.094 0a1 1 0 0 0-.094 0zm9.813 9.813l1.375.093l.094 1.5l-1.375.406l-.531-.53l.437-1.47z'
@@ -77,7 +77,7 @@ function HomeIcon(props) {
 
 function ColorPaletteIcon(props) {
 	return (
-		<svg width='1em' height='1em' viewBox='0 0 24 24' {...props}>
+		<svg width='25' height='25' viewBox='0 0 24 24' {...props}>
 			<path
 				fill='currentColor'
 				d='M12 3a9 9 0 0 0 0 18c.83 0 1.5-.67 1.5-1.5c0-.39-.15-.74-.39-1.01c-.23-.26-.38-.61-.38-.99c0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5c0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9S8 9.67 8 10.5S7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5s-.67 1.5-1.5 1.5z'
@@ -85,4 +85,15 @@ function ColorPaletteIcon(props) {
 		</svg>
 	);
 }
-export { CreateNewIcon, SunIcon, HalfMoonIcon, TrashIcon, ArchiveIcon, UnarchiveIcon, HomeIcon, ColorPaletteIcon };
+
+function EditIcon(props) {
+	return (
+		<svg width='25' height='25' viewBox='0 0 24 24' {...props}>
+			<path
+				fill='currentColor'
+				d='M3 17.25V21h3.75L17.81 9.94l-3.75-3.75zM20.71 5.63l-2.34-2.34a.996.996 0 0 0-1.41 0l-1.83 1.83l3.75 3.75l1.83-1.83a.996.996 0 0 0 0-1.41z'
+			></path>
+		</svg>
+	);
+}
+export { CreateNewIcon, SunIcon, HalfMoonIcon, TrashIcon, ArchiveIcon, UnarchiveIcon, HomeIcon, ColorPaletteIcon, EditIcon };

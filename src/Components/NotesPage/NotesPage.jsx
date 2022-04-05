@@ -2,44 +2,57 @@ import React, { useState, useEffect } from 'react';
 import { useModal, useNotes } from '../../context/';
 import { formatDate } from '../../backend/utils/authUtils';
 import { EditorState, convertToRaw, ContentState } from 'draft-js';
+import { Modal } from './modal/Modal';
+import { AddNewNoteCard } from './modal/AddNewNoteCard.jsx';
+import { CreateNewIcon } from '../../assets/svg/allsvg';
+import { NotesCard } from '../NotesCard/NotesCard';
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import './MyEditor.css';
 import 'draft-js/dist/Draft.css';
-import { Modal } from './modal/Modal';
-import { AddNewNoteCard } from './modal/AddNewNoteCard.jsx';
-import { CreateNewIcon } from '../../assets/svg/allsvg';
-import { NotesCard } from '../NotesCard/NotesCard';
 
 const NotesPage = () => {
 	const { toggleModal, modal } = useModal();
-	const initialValue = { title: '', body: '', tag: '', priority: '', date: '' };
-	const { notes, postNotes, getNotes } = useNotes();
-	const [textField, setTextField] = useState(initialValue);
+	const initialValue = { title: '', body: '', tag: 'None', priority: 'Low', date: '', cardColor: '#161b22' };
+	const { notes, postNotes } = useNotes();
+	const [formData, setFormData] = useState(initialValue);
 	const [editorState, setEditorState] = useState(EditorState.createEmpty());
 	const submitNote = () => {
 		postNotes({
-			title: textField.title,
-			body: textField.body,
-			tags: 'tags',
+			title: formData.title,
+			body: formData.body,
+			tag: formData.tag,
+			priority: formData.priority,
+			cardColor: formData.cardColor,
 			createdAt: formatDate(),
-			priority: 'high',
 		});
 		setEditorState(EditorState.createEmpty());
-		setTextField(initialValue);
+		setFormData(initialValue);
 		toggleModal();
 	};
 
 	const titleChangeHandler = (e) => {
-		setTextField({ ...textField, title: e.target.value });
+		setFormData({ ...formData, title: e.target.value });
+	};
+
+	const tagChangeHandler = (e) => {
+		setFormData({ ...formData, tag: e.target.value });
+	};
+
+	const priorityChangeHandler = (e) => {
+		setFormData({ ...formData, priority: e.target.value });
 	};
 
 	const onEditorStateChange = (editorState) => {
 		setEditorState(editorState);
 	};
 
-	const editField = (body) => {
+	const colorChangeHandler = (color) => {
+		setFormData({ ...formData, cardColor: color });
+	};
+
+	const bodyFieldHandler = (body) => {
 		const html = body;
 		const contentBlock = htmlToDraft(html);
 		const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
@@ -48,27 +61,30 @@ const NotesPage = () => {
 	};
 
 	useEffect(() => {
-		setTextField({ ...textField, body: draftToHtml(convertToRaw(editorState.getCurrentContent())) });
+		setFormData({ ...formData, body: draftToHtml(convertToRaw(editorState.getCurrentContent())) });
 	}, [editorState]);
 
 	return (
 		<div className='app-content'>
-			<button onClick={() => toggleModal()} className='btn btn-fab'>
+			<button onClick={() => toggleModal()} className='btn btn-fab flex-column justify-content-center align-items-center'>
 				<CreateNewIcon />
 			</button>
 			<Modal showModal={modal}>
 				<AddNewNoteCard
-					onEditorStateChange={onEditorStateChange}
-					titleValue={textField.title}
-					submitNote={submitNote}
+					formData={formData}
 					editorState={editorState}
+					onEditorStateChange={onEditorStateChange}
+					submitNote={submitNote}
 					titleChangeHandler={titleChangeHandler}
+					tagChangeHandler={tagChangeHandler}
+					priorityChangeHandler={priorityChangeHandler}
+					colorChangeHandler={colorChangeHandler}
 				/>
 			</Modal>
 
 			{notes.length > 0 ? (
 				notes.map((note) => {
-					return <NotesCard note={note} key={note._id} />;
+					return <NotesCard note={note} key={note._id} isHomePage={true} />;
 				})
 			) : (
 				<h1>Add Notes here</h1>

@@ -14,10 +14,10 @@
 
 .app-content {
 	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 4rem;
-	align-items: center;
+	flex-wrap: wrap;
+	flex-direction: row;
+	align-items: flex-start;
+	gap: 2rem;
 	grid-area: main-content;
 }
 
@@ -39,4 +39,8 @@
 	background-color: var(--colour-text-grey);
 	color: var(--colour-error-second);
 	cursor: not-allowed;
+}
+
+.width-100 {
+	width: 100%;
 }
