@@ -33,4 +33,56 @@ function HalfMoonIcon(props) {
 	);
 }
 
-export { CreateNewIcon, SunIcon, HalfMoonIcon };
+function TrashIcon(props) {
+	return (
+		<svg width='25' height='25' viewBox='0 0 256 256' {...props}>
+			<path fill='currentColor' d='M200 56v152a8 8 0 0 1-8 8H64a8 8 0 0 1-8-8V56Z' opacity='.2'></path>
+			<path
+				fill='currentColor'
+				d='M216 48H40a8 8 0 0 0 0 16h8v144a16 16 0 0 0 16 16h128a16 16 0 0 0 16-16V64h8a8 8 0 0 0 0-16Zm-24 160H64V64h128ZM80 24a8 8 0 0 1 8-8h80a8 8 0 0 1 0 16H88a8 8 0 0 1-8-8Z'
+			></path>
+		</svg>
+	);
+}
+
+function ArchiveIcon(props) {
+	return (
+		<svg width='25' height='25' viewBox='0 0 24 24' {...props}>
+			<path
+				fill='currentColor'
+				d='M4 3h16l2 4v13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V7.004L4 3zm16 6H4v10h16V9zm-.236-2l-1-2H5.237l-1 2h15.527zM13 14h3l-4 4l-4-4h3v-4h2v4z'
+			></path>
+		</svg>
+	);
+}
+
+function UnarchiveIcon(props) {
+	return (
+		<svg width='25' height='25' viewBox='0 0 24 24' {...props}>
+			<path
+				fill='currentColor'
+				d='m20 3l2 4v13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V7.004L4 3h16zm0 6H4v10h16V9zm-8 1l4 4h-3v4h-2v-4H8l4-4zm6.764-5H5.236l-.999 2h15.527l-1-2z'
+			></path>
+		</svg>
+	);
+}
+
+function HomeIcon(props) {
+	return (
+		<svg width='25' height='25' viewBox='0 0 24 24' {...props}>
+			<path fill='currentColor' d='M10 20v-6h4v6h5v-8h3L12 3L2 12h3v8z'></path>
+		</svg>
+	);
+}
+
+function ColorPaletteIcon(props) {
+	return (
+		<svg width='1em' height='1em' viewBox='0 0 24 24' {...props}>
+			<path
+				fill='currentColor'
+				d='M12 3a9 9 0 0 0 0 18c.83 0 1.5-.67 1.5-1.5c0-.39-.15-.74-.39-1.01c-.23-.26-.38-.61-.38-.99c0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5c0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9S8 9.67 8 10.5S7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5s-.67 1.5-1.5 1.5z'
+			></path>
+		</svg>
+	);
+}
+export { CreateNewIcon, SunIcon, HalfMoonIcon, TrashIcon, ArchiveIcon, UnarchiveIcon, HomeIcon, ColorPaletteIcon };

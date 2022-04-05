@@ -1,16 +1,18 @@
 import { ArchiveProvider } from './ArchiveContext/ArchiveContext';
-import { ThemeProvider, AuthProvider, NotesProvider } from './index';
+import { ThemeProvider, AuthProvider, NotesProvider, ModalProvider } from './index';
 import { TrashProvider } from './TrashContext/TrashContext';
 
 const AllProvider = ({ children }) => {
 	return (
 		<ThemeProvider>
 			<AuthProvider>
-				<NotesProvider>
-					<ArchiveProvider>
-						<TrashProvider>{children}</TrashProvider>
-					</ArchiveProvider>
-				</NotesProvider>
+				<ModalProvider>
+					<NotesProvider>
+						<ArchiveProvider>
+							<TrashProvider>{children}</TrashProvider>
+						</ArchiveProvider>
+					</NotesProvider>
+				</ModalProvider>
 			</AuthProvider>
 		</ThemeProvider>
 	);

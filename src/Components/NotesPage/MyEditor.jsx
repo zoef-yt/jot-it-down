@@ -12,6 +12,7 @@ const MyEditor = ({ editorState, onEditorStateChange }) => {
 				editorClassName='editor-class'
 				toolbarClassName='toolbar-class'
 				onEditorStateChange={onEditorStateChange}
+				placeholder='Enter your note here...'
 				hashtag={{
 					separator: ' ',
 					trigger: '#',

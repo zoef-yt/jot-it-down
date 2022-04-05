@@ -10,19 +10,21 @@ const ArchivePage = () => {
 			{archiveNotes.length > 0 ? (
 				<div>
 					{archiveNotes.map((note) => {
+						const { _id, body, createdAt, tags, title } = note;
+
 						return (
-							<div className='card ' key={note._id}>
-								<h3>{note.title}</h3>
-								<p>{note.body}</p>
-								<p>{note.createdAt}</p>
+							<div className='card ' key={_id}>
+								<h3>{title}</h3>
+								<div style={{ width: '100%' }} className=' rdw-editor-main' dangerouslySetInnerHTML={{ __html: body }}></div>
+								<p>{createdAt}</p>
 								<li>
-									{note.tags.map((tag) => {
+									{tags.map((tag) => {
 										return <span key={tag}>{tag}</span>;
 									})}
 								</li>
 								<button
 									onClick={() => {
-										deleteArchiveNotes(note._id);
+										deleteArchiveNotes(_id);
 										sendArchiveToTrash(note);
 									}}
 									className='btn btn-secondary '
@@ -31,7 +33,7 @@ const ArchivePage = () => {
 								</button>
 								<button
 									onClick={() => {
-										sendArchiveToNotes(note._id);
+										sendArchiveToNotes(_id);
 										getNotes();
 									}}
 									className='btn btn-secondary '
