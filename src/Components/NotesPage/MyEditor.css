@@ -2,7 +2,7 @@
 	background-color: var(--colour-black-third);
 	color: var(--colour-text-white);
 	display: block;
-	border-radius: 0 0 0.5rem 0.5rem;
+	border-radius: 0 0 1rem 1rem;
 	outline: 1px solid var(--colour-primary-second);
 	padding: 0 1rem;
 	max-height: 20rem;
@@ -18,12 +18,12 @@
 }
 
 .toolbar-class {
+	border-radius: 1rem 1rem 0 0;
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
 	padding: 0;
 	background-color: var(--colour-primary-second);
-	border-radius: 0;
 	margin: 0;
 	border: 1px solid var(--colour-primary-second);
 	box-shadow: none;
@@ -55,8 +55,8 @@
 .my-editor .rdw-option-wrapper {
 	background-color: transparent;
 	border-color: var(--colour-primary);
-	border-radius: 0.5rem;
-	margin: 1;
+	border-radius: 5px;
+	padding: 9px;
 }
 
 .my-editor .rdw-option-wrapper:hover {

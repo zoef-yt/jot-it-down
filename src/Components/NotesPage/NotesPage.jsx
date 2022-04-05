@@ -2,18 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { useArchive, useAuth, useNotes } from '../../context/';
 import { formatDate } from '../../backend/utils/authUtils';
 import { EditorState, convertToRaw, ContentState } from 'draft-js';
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import './MyEditor.css';
+import { MyEditor } from './MyEditor';
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
-import { MyEditor } from './MyEditor';
-import 'draft-js/dist/Draft.css';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import './MyEditor.css';
+import 'draft-js/dist/Draft.css';
 
 const NotesPage = () => {
+	const initialValue = { title: '', body: '' };
 	const { notes, postNotes, getNotes } = useNotes();
 	const { sendNotesToArchive } = useArchive();
-	const [textField, setTextField] = useState({ title: '', body: '' });
+	const [textField, setTextField] = useState(initialValue);
 	const [editorState, setEditorState] = useState(EditorState.createEmpty());
 	const submitNote = () => {
 		postNotes({
@@ -23,9 +23,10 @@ const NotesPage = () => {
 			createdAt: formatDate(),
 		});
 		setEditorState(EditorState.createEmpty());
-		setTextField({ title: '', body: '' });
+		setTextField(initialValue);
 	};
-	const onChangerHandler = (e) => {
+
+	const titleChangeHandler = (e) => {
 		setTextField({ ...textField, title: e.target.value });
 	};
 
@@ -43,6 +44,7 @@ const NotesPage = () => {
 
 	console.log(draftToHtml(convertToRaw(editorState.getCurrentContent())));
 	const isBodyEmpty = editorState.getCurrentContent().getPlainText().length === 0;
+	console.log(isBodyEmpty);
 	useEffect(() => {
 		setTextField({ ...textField, body: draftToHtml(convertToRaw(editorState.getCurrentContent())) });
 	}, [editorState]);
@@ -53,12 +55,12 @@ const NotesPage = () => {
 				<div className='flex-row  '>
 					<label>
 						Title:
-						<input type='text' name='title' className='text-field' onChange={onChangerHandler} />
+						<input type='text' name='title' className='text-field' value={textField.title} onChange={titleChangeHandler} />
 					</label>
 					{/* //! Commented for future */}
 					{/* <label>
 						tags:
-						<input type='text' name='title' className='text-field' onChange={onChangerHandler} />
+						<input type='text' name='title' className='text-field' onChange={titleChangeHandler} />
 					</label> */}
 				</div>
 
@@ -76,6 +78,7 @@ const NotesPage = () => {
 			{notes.length > 0 ? (
 				<div>
 					{notes.map((note) => {
+						const { _id, body, createdAt, tags } = note;
 						return (
 							<div className='card ' key={note._id}>
 								<h3>{note.title}</h3>
