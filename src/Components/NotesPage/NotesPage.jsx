@@ -108,7 +108,6 @@ const NotesPage = () => {
 export { NotesPage };
 
 const getFilterData = (filterState) => {
-	console.log(filterState);
 	const { tag, priority, search, dataToShow } = filterState;
 	const dataByTag = getDataByTag(tag, dataToShow);
 	const dataByPriority = getDataByPriority(priority, dataByTag);
@@ -122,6 +121,5 @@ const getDataByPriority = (selectedPriority, data) =>
 	selectedPriority !== '' && selectedPriority !== 'All' ? data.filter((note) => note.priority == selectedPriority) : data;
 
 const getDataBySearch = (searchedWord, data) => {
-	console.log(data);
 	return searchedWord !== null && searchedWord !== '' ? data.filter((note) => note.title.toLowerCase().includes(searchedWord.toLowerCase())) : data;
 };

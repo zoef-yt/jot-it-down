@@ -13,7 +13,6 @@ const FilterContext = createContext();
 
 const FilterProvider = ({ children }) => {
 	const [FilterState, FilterDispatch] = useReducer(filterReducer, initialData);
-	console.log(FilterState);
 	return <FilterContext.Provider value={{ FilterState, FilterDispatch }}>{children}</FilterContext.Provider>;
 };
 
