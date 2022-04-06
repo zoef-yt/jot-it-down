@@ -9,23 +9,25 @@ function TrashPage() {
 			{trashNotes.length > 0 ? (
 				<div>
 					{trashNotes.map((note) => {
+						const { _id, body, createdAt, tags, title } = note;
+
 						return (
-							<div className='card ' key={note._id}>
-								<h3>{note.title}</h3>
-								<p>{note.body}</p>
-								<p>{note.createdAt}</p>
+							<div className='card ' key={_id}>
+								<h3>{title}</h3>
+								<div style={{ width: '100%' }} className=' rdw-editor-main' dangerouslySetInnerHTML={{ __html: body }}></div>
+								<p>{createdAt}</p>
 								<li>
-									{note.tags.map((tag) => {
+									{tags.map((tag) => {
 										return <span key={tag}>{tag}</span>;
 									})}
 								</li>
-								<button onClick={() => deleteTrashNotes(note._id)} className='btn btn-secondary '>
+								<button onClick={() => deleteTrashNotes(_id)} className='btn btn-secondary '>
 									delete from trash
 								</button>
 								<button
 									onClick={() => {
 										postNotes(note);
-										deleteTrashNotes(note._id);
+										deleteTrashNotes(_id);
 									}}
 									className='btn btn-secondary '
 								>

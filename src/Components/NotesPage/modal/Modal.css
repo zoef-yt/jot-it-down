@@ -1,0 +1,68 @@
+.card:hover {
+	transform: scale(1);
+	box-shadow: 0px 1px 1px var(--colour-text-white);
+}
+
+.input-group {
+	margin: 1rem;
+	width: 90%;
+	display: flex;
+	flex-direction: column;
+}
+
+.input-group > * {
+	margin: 0.5rem;
+}
+
+.input-group .text-field {
+	margin: 0;
+	width: 30rem;
+	max-width: 100%;
+}
+
+.remember-me-block {
+	margin: 0 0 1rem 0;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.checkbox {
+	cursor: pointer;
+	margin: 0 0.5rem 0 0;
+	width: 1.8rem;
+	height: 1.8rem;
+	transition: all 0.3s ease-in-out;
+}
+
+.modal-card {
+	max-width: max-content;
+	width: 100%;
+	z-index: 3;
+}
+
+.modal-error {
+	color: var(--colour-error);
+	font-size: 1.6rem;
+	margin: 0.5rem 0;
+	width: 30rem;
+	text-align: center;
+}
+
+.modal-opened {
+	backdrop-filter: blur(5px);
+}
+
+.modal-backdrop {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	padding-top: 3rem;
+	align-items: flex-start;
+	justify-content: center;
+	z-index: 2;
+}

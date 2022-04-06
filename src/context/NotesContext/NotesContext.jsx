@@ -37,7 +37,27 @@ const NotesProvider = ({ children }) => {
 			},
 		});
 	};
-	const updateNotes = () => {};
+	const updateNotes = (_id, note) => {
+		fetchNotes({
+			method: 'POST',
+			url: `/api/notes/${_id}`,
+			headers: {
+				authorization: localStorage.getItem('token'),
+			},
+			data: {
+				note,
+			},
+		});
+	};
+	const deleteNotes = (_id) => {
+		fetchNotes({
+			method: 'DELETE',
+			url: `/api/notes/${_id}`,
+			headers: {
+				authorization: localStorage.getItem('token'),
+			},
+		});
+	};
 
 	return <NotesContext.Provider value={{ notes, getNotes, postNotes, updateNotes }}>{children}</NotesContext.Provider>;
 };
