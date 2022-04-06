@@ -11,7 +11,7 @@
 .colour-palette {
 	display: none;
 	border-radius: 1rem;
-	background-color: var(--colour-text-white-two);
+	background-color: var(--both-theme-white);
 	width: 15rem;
 	position: absolute;
 	top: -8rem;
@@ -20,6 +20,7 @@
 }
 
 .colour-palette-item {
+	border-radius: 50%;
 	display: inline-block;
 	width: 3rem;
 	height: 3rem;

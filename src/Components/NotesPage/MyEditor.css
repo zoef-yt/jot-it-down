@@ -1,7 +1,8 @@
 .editor-class {
 	background-color: var(--colour-black-third);
-	color: var(--colour-text-white);
 	display: block;
+	/* !! Only one place this color is being used so didn't use var here. */
+	color: #000;
 	border-radius: 0 0 1rem 1rem;
 	outline: 1px solid var(--colour-primary-second);
 	padding: 0 1rem;

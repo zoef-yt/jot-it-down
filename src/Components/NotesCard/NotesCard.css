@@ -1,4 +1,5 @@
 .notes-card {
+	color: var(--both-theme-white);
 	width: fit-content;
 	max-width: 40rem;
 	height: fit-content;

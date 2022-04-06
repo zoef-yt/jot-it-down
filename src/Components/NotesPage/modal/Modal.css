@@ -37,6 +37,7 @@
 }
 
 .modal-card {
+	color: var(--both-theme-white);
 	max-width: max-content;
 	width: 100%;
 	z-index: 3;
