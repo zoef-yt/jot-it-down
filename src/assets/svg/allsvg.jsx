@@ -96,4 +96,15 @@ function EditIcon(props) {
 		</svg>
 	);
 }
-export { CreateNewIcon, SunIcon, HalfMoonIcon, TrashIcon, ArchiveIcon, UnarchiveIcon, HomeIcon, ColorPaletteIcon, EditIcon };
+
+function RestoreIcon(props) {
+	return (
+		<svg width='1em' height='1em' viewBox='0 0 24 24' {...props}>
+			<path
+				fill='currentColor'
+				d='M12 3a9 9 0 0 0-9 9H0l4 4l4-4H5a7 7 0 0 1 7-7a7 7 0 0 1 7 7a7 7 0 0 1-7 7c-1.5 0-2.91-.5-4.06-1.3L6.5 19.14A9.115 9.115 0 0 0 12 21a9 9 0 0 0 9-9a9 9 0 0 0-9-9m2 9a2 2 0 0 0-2-2a2 2 0 0 0-2 2a2 2 0 0 0 2 2a2 2 0 0 0 2-2Z'
+			></path>
+		</svg>
+	);
+}
+export { CreateNewIcon, SunIcon, HalfMoonIcon, TrashIcon, ArchiveIcon, UnarchiveIcon, HomeIcon, ColorPaletteIcon, EditIcon, RestoreIcon };

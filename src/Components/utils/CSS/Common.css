@@ -21,6 +21,17 @@
 	grid-area: main-content;
 }
 
+.notes-body {
+	grid-area: main-content;
+}
+.notes-content {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	align-items: flex-start;
+	gap: 2rem;
+}
+
 .app-footer {
 	display: flex;
 	justify-content: center;

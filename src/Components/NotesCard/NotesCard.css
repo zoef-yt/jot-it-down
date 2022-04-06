@@ -1,6 +1,15 @@
 .notes-card {
+	color: var(--both-theme-white);
 	width: fit-content;
 	max-width: 40rem;
 	height: fit-content;
 	max-height: 40rem;
+}
+
+.notes-card-btn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	max-width: 4rem;
+	max-height: 4rem;
 }

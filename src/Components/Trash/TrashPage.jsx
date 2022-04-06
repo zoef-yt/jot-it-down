@@ -3,7 +3,7 @@ import { useNotes, useTrash } from '../../context';
 import { NotesCard } from '../NotesCard/NotesCard';
 
 function TrashPage() {
-	const { trashNotes, deleteTrashNotes } = useTrash();
+	const { trashNotes } = useTrash();
 	const { postNotes } = useNotes();
 	return (
 		<div className='app-content'>
