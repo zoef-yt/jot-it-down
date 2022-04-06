@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useModal, useNotes } from '../../context/';
+import { useFilter, useModal, useNotes } from '../../context/';
 import { formatDate } from '../../backend/utils/authUtils';
 import { EditorState, convertToRaw, ContentState } from 'draft-js';
 import { Modal } from './modal/Modal';
@@ -11,6 +11,7 @@ import htmlToDraft from 'html-to-draftjs';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import './MyEditor.css';
 import 'draft-js/dist/Draft.css';
+import { FilterBar } from './FilterBar/FilterBar';
 
 const NotesPage = () => {
 	const { toggleModal, modal } = useModal();
@@ -60,37 +61,67 @@ const NotesPage = () => {
 		setEditorState(editorState);
 	};
 
+	const { FilterState } = useFilter();
+
 	useEffect(() => {
 		setFormData({ ...formData, body: draftToHtml(convertToRaw(editorState.getCurrentContent())) });
 	}, [editorState]);
 
 	return (
-		<div className='app-content'>
-			<button onClick={() => toggleModal()} className='btn btn-fab flex-column justify-content-center align-items-center'>
-				<CreateNewIcon />
-			</button>
-			<Modal showModal={modal}>
-				<AddNewNoteCard
-					formData={formData}
-					editorState={editorState}
-					onEditorStateChange={onEditorStateChange}
-					submitNote={submitNote}
-					titleChangeHandler={titleChangeHandler}
-					tagChangeHandler={tagChangeHandler}
-					priorityChangeHandler={priorityChangeHandler}
-					colorChangeHandler={colorChangeHandler}
-				/>
-			</Modal>
+		<>
+			<div className='notes-body'>
+				{notes.length > 0 && <FilterBar />}
+				<div className='notes-content'>
+					<button onClick={() => toggleModal()} className='btn btn-fab flex-column justify-content-center align-items-center'>
+						<CreateNewIcon />
+					</button>
+					<Modal showModal={modal}>
+						<AddNewNoteCard
+							formData={formData}
+							editorState={editorState}
+							onEditorStateChange={onEditorStateChange}
+							submitNote={submitNote}
+							titleChangeHandler={titleChangeHandler}
+							tagChangeHandler={tagChangeHandler}
+							priorityChangeHandler={priorityChangeHandler}
+							colorChangeHandler={colorChangeHandler}
+						/>
+					</Modal>
 
-			{notes.length > 0 ? (
-				notes.map((note) => {
-					return <NotesCard note={note} key={note._id} isHomePage={true} />;
-				})
-			) : (
-				<h1>Add Notes here</h1>
-			)}
-		</div>
+					{notes.length > 0 ? (
+						getFilterData(FilterState).length > 0 ? (
+							getFilterData(FilterState).map((note) => {
+								return <NotesCard note={note} key={note._id} isHomePage={true} />;
+							})
+						) : (
+							<h1>No notes with applied filter</h1>
+						)
+					) : (
+						<h1>Add Notes here</h1>
+					)}
+				</div>
+			</div>
+		</>
 	);
 };
 
 export { NotesPage };
+
+const getFilterData = (filterState) => {
+	console.log(filterState);
+	const { tag, priority, search, dataToShow } = filterState;
+	const dataByTag = getDataByTag(tag, dataToShow);
+	const dataByPriority = getDataByPriority(priority, dataByTag);
+	const dataBySearch = getDataBySearch(search, dataByPriority);
+	return dataBySearch;
+};
+
+const getDataByTag = (selectedTag, data) => (selectedTag === 'None' || selectedTag === '' ? data : data.filter((note) => note.tag === selectedTag));
+
+const getDataByPriority = (selectedPriority, data) =>
+	selectedPriority !== '' && selectedPriority !== 'All' ? data.filter((note) => note.priority == selectedPriority) : data;
+
+const getDataBySearch = (searchedWord, data) => {
+	console.log(data);
+	return searchedWord !== null && searchedWord !== '' ? data.filter((note) => note.title.toLowerCase().includes(searchedWord.toLowerCase())) : data;
+};

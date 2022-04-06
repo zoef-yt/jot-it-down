@@ -1,5 +1,8 @@
 import React from 'react';
 import { ColorPaletteIcon } from '../../../assets/svg/allsvg.jsx';
+import { colorsArray } from '../../../data/colorsData.jsx';
+import { priorities } from '../../../data/priorities.jsx';
+import { tags } from '../../../data/tags.jsx';
 import { MyEditor } from '../MyEditor.jsx';
 import '../NotesPage.css';
 function AddNewNoteCard({
@@ -26,23 +29,22 @@ function AddNewNoteCard({
 					{' '}
 					<label>Tag:</label>
 					<select value={tag} onChange={tagChangeHandler} className='select-tag' name='tag'>
-						<option value='None'>None</option>
-						<option value='Work'>Work</option>
-						<option value='Exercise'>Exercise</option>
-						<option value='Health'>Health</option>
-						<option value='Teams'>Teams</option>
-						<option value='Creativity'>Creativity</option>
-						<option value='Chores'>Chores</option>
-						<option value='School'>School</option>
+						{tags.map((tag) => (
+							<option key={tag} value={tag}>
+								{tag}
+							</option>
+						))}
 					</select>
 				</div>
 
 				<div className='flex-column'>
 					<label>Priority:</label>
 					<select className='select-tag' value={priority} name='priority' onChange={priorityChangeHandler}>
-						<option value='Low'>Low</option>
-						<option value='Medium'>Medium</option>
-						<option value='High'>High</option>
+						{priorities.map((priority) => (
+							<option key={priority} value={priority}>
+								{priority}
+							</option>
+						))}
 					</select>
 				</div>
 			</div>
@@ -55,7 +57,7 @@ function AddNewNoteCard({
 				<button
 					title={`${canSubmit ? 'Add to notes' : 'Cannot leave the fields blank'}`}
 					className={`btn ${canSubmit ? 'btn-primary' : 'btn-disabled'} `}
-					onClick={submitNote}
+					onClick={canSubmit ? () => submitNote() : null}
 				>
 					Add
 				</button>
@@ -78,12 +80,3 @@ function AddNewNoteCard({
 }
 
 export { AddNewNoteCard };
-
-const colorsArray = [
-	{ color: '#161b22' },
-	{ color: '#21436e' },
-	{ color: '#077825' },
-	{ color: '#763830' },
-	{ color: '#7a6e1a' },
-	{ color: '#4a3070' },
-];

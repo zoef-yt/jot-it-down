@@ -1,15 +1,17 @@
 import { useContext, createContext, useState, useEffect } from 'react';
 import { useAxios } from '../../CustomHooks';
+import { useFilter } from '../FilterContext/FilterContext';
 
 const NotesContext = createContext();
 
 const NotesProvider = ({ children }) => {
 	const [notes, setNotes] = useState([]);
 	const { response: notesResponse, operation: fetchNotes } = useAxios();
-
+	const { FilterDispatch } = useFilter();
 	useEffect(() => {
 		if (notesResponse != null && notesResponse.notes) {
 			setNotes(notesResponse.notes);
+			FilterDispatch({ type: 'SET_DATA', payload: notesResponse.notes });
 		} else {
 			getNotes();
 		}

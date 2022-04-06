@@ -1,11 +1,12 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { HalfMoonIcon, SunIcon } from '../../assets/svg/allsvg';
-import { useAuth, useTheme } from '../../context';
+import { useAuth, useFilter, useTheme } from '../../context';
 import './header.css';
 function Header() {
 	const { theme, toggleTheme } = useTheme();
 	const { user } = useAuth();
+	const { FilterDispatch, FilterState } = useFilter();
 	const nameInitials = user?.foundUser.firstName[0] + user?.foundUser.lastName[0];
 	return (
 		<nav className='header'>
@@ -13,7 +14,13 @@ function Header() {
 				<h1>Jot It Down</h1>
 			</NavLink>
 
-			<input type='search' className='text-field' placeholder='Search For Games' />
+			<input
+				type='search'
+				className='text-field'
+				placeholder='Search For Games'
+				value={FilterState.search}
+				onChange={(e) => FilterDispatch({ type: 'SEARCH', payload: e.target.value })}
+			/>
 
 			<div className='header-cta'>
 				<div className='flex-column' onClick={toggleTheme}>

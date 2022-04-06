@@ -4,6 +4,7 @@ const NotesCard = ({ note, isHomePage = false, isArchive = false, isTrash = fals
 	const { sendNotesToArchive } = useArchive();
 	const { getNotes } = useNotes();
 	const { _id, body, createdAt, cardColor, tag, title, priority } = note;
+	const date = new Date(createdAt).toLocaleString();
 	return (
 		<div style={{ backgroundColor: cardColor }} className='card notes-card'>
 			<h3>{title}</h3>
@@ -14,7 +15,7 @@ const NotesCard = ({ note, isHomePage = false, isArchive = false, isTrash = fals
 			</div>
 			<hr />
 			<div style={{ width: '100%' }} className=' rdw-editor-main' dangerouslySetInnerHTML={{ __html: body }}></div>
-			<p>{createdAt}</p>
+			<p>{date}</p>
 			{isHomePage && (
 				<>
 					<button
