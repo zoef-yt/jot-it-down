@@ -14,8 +14,9 @@ function AddNewNoteCard({
 	tagChangeHandler,
 	priorityChangeHandler,
 	colorChangeHandler,
+	updateNoteHandler,
 }) {
-	const { title, body, tag, priority, cardColor, createdAt } = formData;
+	const { title, tag, priority, cardColor, isEdit, _id } = formData;
 	const isBodyEmpty = editorState.getCurrentContent().getPlainText().length === 0;
 	const canSubmit = !isBodyEmpty && title.length > 0;
 	return (
@@ -57,9 +58,9 @@ function AddNewNoteCard({
 				<button
 					title={`${canSubmit ? 'Add to notes' : 'Cannot leave the fields blank'}`}
 					className={`btn ${canSubmit ? 'btn-primary' : 'btn-disabled'} `}
-					onClick={canSubmit ? () => submitNote() : null}
+					onClick={canSubmit ? (isEdit ? () => updateNoteHandler(_id, formData) : () => submitNote()) : null}
 				>
-					Add
+					{isEdit ? 'Update' : 'Add'}
 				</button>
 				<div className='colour-palette-holder flex-column '>
 					<ColorPaletteIcon />
