@@ -8,7 +8,6 @@
 }
 
 .filter-items {
-	/* width: 60vw; */
 	max-width: 90rem;
 	margin: 0 auto;
 	display: grid;

@@ -62,7 +62,7 @@ const NotesPage = () => {
 		setEditorState(editorState);
 	};
 
-	const { FilterState } = useFilter();
+	const { filterState } = useFilter();
 
 	useEffect(() => {
 		setFormData({ ...formData, body: draftToHtml(convertToRaw(editorState.getCurrentContent())) });
@@ -90,8 +90,8 @@ const NotesPage = () => {
 					</Modal>
 
 					{notes.length > 0 ? (
-						getFilterData(FilterState).length > 0 ? (
-							getFilterData(FilterState).map((note) => {
+						getFilterData(filterState).length > 0 ? (
+							getFilterData(filterState).map((note) => {
 								return <NotesCard note={note} key={note._id} isHomePage={true} />;
 							})
 						) : (

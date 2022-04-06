@@ -33,11 +33,6 @@ const NotesCard = ({ note, isHomePage = false, isArchive = false, isTrash = fals
 		postNotes(note);
 	};
 
-	// const send = (_id) => {
-	// 	sendNotesToArchive(_id);
-	// 	getArchive();
-	// };
-
 	return (
 		<div style={{ backgroundColor: cardColor }} className='card notes-card'>
 			<h3>{title}</h3>

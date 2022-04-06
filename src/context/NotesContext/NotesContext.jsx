@@ -7,11 +7,11 @@ const NotesContext = createContext();
 const NotesProvider = ({ children }) => {
 	const [notes, setNotes] = useState([]);
 	const { response: notesResponse, operation: fetchNotes } = useAxios();
-	const { FilterDispatch } = useFilter();
+	const { filterDispatch } = useFilter();
 	useEffect(() => {
-		if (notesResponse != null && notesResponse.notes) {
+		if (notesResponse?.notes) {
 			setNotes(notesResponse.notes);
-			FilterDispatch({ type: 'SET_DATA', payload: notesResponse.notes });
+			filterDispatch({ type: 'SET_DATA', payload: notesResponse.notes });
 		} else {
 			getNotes();
 		}

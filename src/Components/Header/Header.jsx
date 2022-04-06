@@ -6,7 +6,7 @@ import './header.css';
 function Header() {
 	const { theme, toggleTheme } = useTheme();
 	const { user } = useAuth();
-	const { FilterDispatch, FilterState } = useFilter();
+	const { filterDispatch, filterState } = useFilter();
 	const nameInitials = user?.foundUser.firstName[0] + user?.foundUser.lastName[0];
 	return (
 		<nav className='header'>
@@ -18,8 +18,8 @@ function Header() {
 				type='search'
 				className='text-field'
 				placeholder='Search For Games'
-				value={FilterState.search}
-				onChange={(e) => FilterDispatch({ type: 'SEARCH', payload: e.target.value })}
+				value={filterState.search}
+				onChange={(e) => filterDispatch({ type: 'SEARCH', payload: e.target.value })}
 			/>
 
 			<div className='header-cta'>

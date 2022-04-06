@@ -3,19 +3,19 @@ import { useFilter } from '../../../context';
 import { priorities } from '../../../data/priorities';
 import { tags } from '../../../data/tags';
 import './FilterBar.css';
-const FilterDropDownbutton = (props) => {
+const FilterDropDownbutton = ({ buttonName, scroll, children }) => {
 	return (
 		<div className='dropdown'>
-			<button className='btn btn-filter btn-primary dropdown-btn'>{props.buttonName}</button>
-			<div style={{ transform: `translateX(-${props.scroll}px)` }} className='dropdown-content'>
-				{props.children}
+			<button className='btn btn-filter btn-primary dropdown-btn'>{buttonName}</button>
+			<div style={{ transform: `translateX(-${scroll}px)` }} className='dropdown-content'>
+				{children}
 			</div>
 		</div>
 	);
 };
 
 const FilterBar = () => {
-	const { FilterState, FilterDispatch } = useFilter();
+	const { filterState, filterDispatch } = useFilter();
 	const [scroll, setScrolled] = useState('');
 	const scrollHandler = (event) => {
 		setScrolled((scroll) => (scroll = event.target.scrollLeft));
@@ -36,8 +36,8 @@ const FilterBar = () => {
 									<input
 										type='radio'
 										name='sort-by-date'
-										checked={FilterState.sortByDate === 'OLDEST_TO_NEWEST'}
-										onChange={() => FilterDispatch({ type: 'SORT_BY_DATE', payload: 'OLDEST_TO_NEWEST' })}
+										checked={filterState.sortByDate === 'OLDEST_TO_NEWEST'}
+										onChange={() => filterDispatch({ type: 'SORT_BY_DATE', payload: 'OLDEST_TO_NEWEST' })}
 									/>
 									Sort Oldest to Newest
 								</label>
@@ -46,8 +46,8 @@ const FilterBar = () => {
 									<input
 										type='radio'
 										name='sort-by-date'
-										checked={FilterState.sortByDate === 'NEWEST_TO_OLDEST'}
-										onChange={() => FilterDispatch({ type: 'SORT_BY_DATE', payload: 'NEWEST_TO_OLDEST' })}
+										checked={filterState.sortByDate === 'NEWEST_TO_OLDEST'}
+										onChange={() => filterDispatch({ type: 'SORT_BY_DATE', payload: 'NEWEST_TO_OLDEST' })}
 									/>
 									Sort Newest to Oldest
 								</label>
@@ -66,8 +66,8 @@ const FilterBar = () => {
 										<input
 											type='radio'
 											name='platform'
-											value={FilterState.tags === tag}
-											onChange={() => FilterDispatch({ type: 'SELECTED_TAG', payload: tag })}
+											value={filterState.tags === tag}
+											onChange={() => filterDispatch({ type: 'SELECTED_TAG', payload: tag })}
 										/>
 										{tag}
 									</label>
@@ -87,8 +87,8 @@ const FilterBar = () => {
 										<input
 											type='radio'
 											name='priority'
-											value={FilterState.priorities === priority}
-											onChange={() => FilterDispatch({ type: 'SELECTED_PRIORITY', payload: priority })}
+											value={filterState.priorities === priority}
+											onChange={() => filterDispatch({ type: 'SELECTED_PRIORITY', payload: priority })}
 										/>
 										{priority}
 									</label>
@@ -97,7 +97,7 @@ const FilterBar = () => {
 						}
 					/>
 
-					<button className='btn btn-link btn-products' onClick={() => FilterDispatch({ type: 'CLEAR_FILTER' })}>
+					<button className='btn btn-link btn-products' onClick={() => filterDispatch({ type: 'CLEAR_FILTER' })}>
 						Clear Filters
 					</button>
 				</div>
