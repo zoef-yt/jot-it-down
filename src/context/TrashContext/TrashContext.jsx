@@ -8,12 +8,14 @@ const TrashProvider = ({ children }) => {
 	const sendArchiveToTrash = (notes) => {
 		setTrashNotes([...trashNotes, notes]);
 	};
+	const notesToTrash = (notes) => {
+		setTrashNotes([...trashNotes, notes]);
+	};
 
-	const trashToNotes = () => {};
 	const deleteTrashNotes = (noteId) => {
 		setTrashNotes((prev) => prev.filter((note) => note._id !== noteId));
 	};
-	return <TrashContext.Provider value={{ trashNotes, sendArchiveToTrash, deleteTrashNotes }}>{children}</TrashContext.Provider>;
+	return <TrashContext.Provider value={{ trashNotes, sendArchiveToTrash, deleteTrashNotes, notesToTrash }}>{children}</TrashContext.Provider>;
 };
 
 const useTrash = () => useContext(TrashContext);

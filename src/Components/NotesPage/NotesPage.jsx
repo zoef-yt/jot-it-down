@@ -20,12 +20,13 @@ const NotesPage = () => {
 	const [formData, setFormData] = useState(initialValue);
 	const [editorState, setEditorState] = useState(EditorState.createEmpty());
 	const submitNote = () => {
+		const { title, body, tag, priority, cardColor } = formData;
 		postNotes({
-			title: formData.title,
-			body: formData.body,
-			tag: formData.tag,
-			priority: formData.priority,
-			cardColor: formData.cardColor,
+			title: title,
+			body: body,
+			tag: tag,
+			priority: priority,
+			cardColor: cardColor,
 			createdAt: formatDate(),
 		});
 		setEditorState(EditorState.createEmpty());

@@ -61,7 +61,7 @@ const NotesProvider = ({ children }) => {
 		});
 	};
 
-	return <NotesContext.Provider value={{ notes, getNotes, postNotes, updateNotes }}>{children}</NotesContext.Provider>;
+	return <NotesContext.Provider value={{ notes, getNotes, postNotes, updateNotes, deleteNotes }}>{children}</NotesContext.Provider>;
 };
 
 const useNotes = () => useContext(NotesContext);
