@@ -4,6 +4,50 @@
 	max-width: 40rem;
 	height: fit-content;
 	max-height: 40rem;
+	animation-name: notes-card-animation;
+	animation-duration: 0.4s;
+}
+
+@keyframes notes-card-animation {
+	0% {
+		opacity: 0;
+		transform: scale(0.8);
+	}
+	50% {
+		opacity: 0.5;
+		transform: scale(1.02);
+	}
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+.notes-card-tags {
+	font-size: 1rem;
+	color: var(--colour-primary);
+}
+
+.notes-card-priority {
+	background-color: var(--colour-primary-second);
+	font-size: 8px;
+	border-radius: 10rem;
+	height: 3rem;
+	width: 5rem;
+	display: flex;
+	justify-content: center;
+	border: none;
+	padding: 0 5px;
+	margin: 5px 0;
+	color: var(--both-theme-white);
+}
+
+.notes-card-title {
+	font-weight: bold;
+	width: 7ch;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .notes-card-btn {

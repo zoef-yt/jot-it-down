@@ -51,6 +51,7 @@ const NotesProvider = ({ children }) => {
 			},
 		});
 	};
+
 	const deleteNotes = (_id) => {
 		fetchNotes({
 			method: 'DELETE',

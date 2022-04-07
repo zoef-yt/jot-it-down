@@ -14,10 +14,11 @@ function AddNewNoteCard({
 	tagChangeHandler,
 	priorityChangeHandler,
 	colorChangeHandler,
+	updateNoteHandler,
 }) {
-	const { title, body, tag, priority, cardColor, createdAt } = formData;
-	const isBodyEmpty = editorState.getCurrentContent().getPlainText().length === 0;
-	const canSubmit = !isBodyEmpty && title.length > 0;
+	const { title, tag, priority, cardColor, isEdit, _id } = formData;
+	const isBodyEmpty = editorState.getCurrentContent().getPlainText().trim().length === 0;
+	const canSubmit = !isBodyEmpty && title.trim().length > 0;
 	return (
 		<div style={{ backgroundColor: cardColor }} className='my-editor modal-card'>
 			<div className='flex-row flex-start'>
@@ -57,9 +58,9 @@ function AddNewNoteCard({
 				<button
 					title={`${canSubmit ? 'Add to notes' : 'Cannot leave the fields blank'}`}
 					className={`btn ${canSubmit ? 'btn-primary' : 'btn-disabled'} `}
-					onClick={canSubmit ? () => submitNote() : null}
+					onClick={canSubmit ? (isEdit ? () => updateNoteHandler(_id, formData) : () => submitNote()) : null}
 				>
-					Add
+					{isEdit ? 'Update' : 'Add'}
 				</button>
 				<div className='colour-palette-holder flex-column '>
 					<ColorPaletteIcon />

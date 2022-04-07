@@ -1,7 +1,8 @@
+import { useState } from 'react';
 import { ArchiveIcon, EditIcon, RestoreIcon, TrashIcon, UnarchiveIcon } from '../../assets/svg/allsvg';
-import { useArchive, useNotes, useTrash } from '../../context/';
+import { useArchive, useNotes, useTrash, useModal } from '../../context/';
 import './NotesCard.css';
-const NotesCard = ({ note, isHomePage = false, isArchive = false, isTrash = false }) => {
+const NotesCard = ({ note, isHomePage = false, isArchive = false, isTrash = false, editNoteHandler }) => {
 	const { sendNotesToArchive, sendArchiveToNotes, deleteArchiveNotes } = useArchive();
 	const { getNotes, deleteNotes, postNotes } = useNotes();
 	const { notesToTrash, deleteTrashNotes } = useTrash();
@@ -33,25 +34,39 @@ const NotesCard = ({ note, isHomePage = false, isArchive = false, isTrash = fals
 		postNotes(note);
 	};
 
+	const editHandler = (_id) => {
+		editNoteHandler(note);
+	};
+
 	return (
 		<div style={{ backgroundColor: cardColor }} className='card notes-card'>
-			<h3>{title}</h3>
-			<hr />
-			<div className='flex-row space-between width-100'>
-				<p>Priority:{priority}</p>
-				{tag !== 'None' && <p>Tag:{tag}</p>}
+			<div className='flex-row'>
+				<h3 title={title} className='notes-card-title'>
+					{title}
+				</h3>
+				<div className='notes-card-tags'>{tag !== 'None' && `#${tag}`}</div>
 			</div>
 			<hr />
-			<div style={{ width: '100%' }} className=' rdw-editor-main' dangerouslySetInnerHTML={{ __html: body }}></div>
-			<p>{date}</p>
+			<div className='rdw-editor-main width-100' dangerouslySetInnerHTML={{ __html: body }}></div>
+
+			<div className='flex-row space-between width-100 align-items-center'>
+				<p className='text-small text-grey'>{date}</p>
+				<div className='notes-card-priority'>{priority}</div>
+			</div>
+
 			<div className='flex-row space-around width-100'>
 				{isHomePage && (
 					<>
-						<button onClick={() => notesToTrashHandler(_id, note)} className='btn btn-secondary notes-card-btn'>
+						<button
+							title='Send to trash page'
+							onClick={() => notesToTrashHandler(_id, note)}
+							className='btn btn-secondary notes-card-btn'
+						>
 							<TrashIcon />
 						</button>
 
 						<button
+							title='Send to archive page'
 							onClick={() => {
 								archiveNoteHandler(_id);
 							}}
@@ -60,7 +75,13 @@ const NotesCard = ({ note, isHomePage = false, isArchive = false, isTrash = fals
 							<ArchiveIcon />
 						</button>
 
-						<button onClick={() => {}} className='btn btn-secondary notes-card-btn'>
+						<button
+							title='Edit note'
+							onClick={() => {
+								editHandler();
+							}}
+							className='btn btn-secondary notes-card-btn'
+						>
 							<EditIcon />
 						</button>
 					</>
@@ -68,11 +89,16 @@ const NotesCard = ({ note, isHomePage = false, isArchive = false, isTrash = fals
 
 				{isArchive && (
 					<>
-						<button onClick={() => archiveToTrashHandler(_id, note)} className='btn btn-secondary notes-card-btn'>
+						<button
+							title='Send to trash page'
+							onClick={() => archiveToTrashHandler(_id, note)}
+							className='btn btn-secondary notes-card-btn'
+						>
 							<TrashIcon />
 						</button>
 
 						<button
+							title='Unarchive note'
 							onClick={() => {
 								unArchiveNoteHandler(_id);
 							}}
@@ -85,11 +111,16 @@ const NotesCard = ({ note, isHomePage = false, isArchive = false, isTrash = fals
 
 				{isTrash && (
 					<>
-						<button onClick={() => undoDeleteHandler(_id, note)} className='btn btn-secondary notes-card-btn'>
+						<button
+							title='Send card to homepage'
+							onClick={() => undoDeleteHandler(_id, note)}
+							className='btn btn-secondary notes-card-btn'
+						>
 							<RestoreIcon />
 						</button>
 
 						<button
+							title='Permanently delete note'
 							onClick={() => {
 								deleteTrashNotes(_id);
 							}}

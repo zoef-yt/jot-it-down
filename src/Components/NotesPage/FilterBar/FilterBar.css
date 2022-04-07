@@ -30,6 +30,12 @@
 	z-index: 1;
 }
 
+.dropdown-content > label {
+	display: block;
+	color: var(--both-theme-white);
+	cursor: pointer;
+}
+
 .dropdown-content::after {
 	content: '';
 	position: absolute;

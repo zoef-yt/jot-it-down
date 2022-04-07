@@ -17,7 +17,7 @@ function Header() {
 			<input
 				type='search'
 				className='text-field'
-				placeholder='Search For Games'
+				placeholder='Search For Notes'
 				value={filterState.search}
 				onChange={(e) => filterDispatch({ type: 'SEARCH', payload: e.target.value })}
 			/>

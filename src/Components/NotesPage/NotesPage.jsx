@@ -15,8 +15,8 @@ import { FilterBar } from './FilterBar/FilterBar';
 
 const NotesPage = () => {
 	const { toggleModal, modal } = useModal();
-	const initialValue = { title: '', body: '', tag: 'None', priority: 'Low', date: '', cardColor: '#161b22' };
-	const { notes, postNotes } = useNotes();
+	const initialValue = { title: '', body: '', tag: 'None', priority: 'Low', date: '', cardColor: '#161b22', isEdit: false };
+	const { notes, postNotes, updateNotes } = useNotes();
 	const [formData, setFormData] = useState(initialValue);
 	const [editorState, setEditorState] = useState(EditorState.createEmpty());
 	const submitNote = () => {
@@ -31,6 +31,10 @@ const NotesPage = () => {
 		});
 		setEditorState(EditorState.createEmpty());
 		setFormData(initialValue);
+		toggleModal();
+	};
+	const updateNoteHandler = (_id, note) => {
+		updateNotes(_id, note);
 		toggleModal();
 	};
 
@@ -62,18 +66,30 @@ const NotesPage = () => {
 		setEditorState(editorState);
 	};
 
+	const createNewNote = () => {
+		setEditorState(EditorState.createEmpty());
+		setFormData(initialValue);
+		toggleModal();
+	};
+
+	const editNoteHandler = (note) => {
+		const { title, body, tag, priority, cardColor, _id } = note;
+		bodyFieldHandler(body);
+		setFormData({ title, body, tag, priority, cardColor, isEdit: true, _id: _id });
+		toggleModal();
+	};
 	const { filterState } = useFilter();
 
 	useEffect(() => {
 		setFormData({ ...formData, body: draftToHtml(convertToRaw(editorState.getCurrentContent())) });
 	}, [editorState]);
-
+	const filteredData = getFilterData(filterState);
 	return (
 		<>
 			<div className='notes-body'>
 				{notes.length > 0 && <FilterBar />}
 				<div className='notes-content'>
-					<button onClick={() => toggleModal()} className='btn btn-fab flex-column justify-content-center align-items-center'>
+					<button onClick={createNewNote} className='btn btn-fab flex-column justify-content-center align-items-center'>
 						<CreateNewIcon />
 					</button>
 					<Modal showModal={modal}>
@@ -86,13 +102,14 @@ const NotesPage = () => {
 							tagChangeHandler={tagChangeHandler}
 							priorityChangeHandler={priorityChangeHandler}
 							colorChangeHandler={colorChangeHandler}
+							updateNoteHandler={updateNoteHandler}
 						/>
 					</Modal>
 
 					{notes.length > 0 ? (
-						getFilterData(filterState).length > 0 ? (
-							getFilterData(filterState).map((note) => {
-								return <NotesCard note={note} key={note._id} isHomePage={true} />;
+						filteredData.length > 0 ? (
+							filteredData.map((note) => {
+								return <NotesCard note={note} editNoteHandler={editNoteHandler} key={note._id} isHomePage={true} />;
 							})
 						) : (
 							<h1>No notes with applied filter</h1>
@@ -122,5 +139,11 @@ const getDataByPriority = (selectedPriority, data) =>
 	selectedPriority !== '' && selectedPriority !== 'All' ? data.filter((note) => note.priority == selectedPriority) : data;
 
 const getDataBySearch = (searchedWord, data) => {
-	return searchedWord !== null && searchedWord !== '' ? data.filter((note) => note.title.toLowerCase().includes(searchedWord.toLowerCase())) : data;
+	return searchedWord !== null && searchedWord !== ''
+		? data.filter(
+				(note) =>
+					note.title.trim().toLowerCase().includes(searchedWord.trim().toLowerCase()) ||
+					note.body.trim().toLowerCase().includes(searchedWord.trim().toLowerCase()),
+		  )
+		: data;
 };
