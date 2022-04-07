@@ -17,7 +17,7 @@ function AddNewNoteCard({
 	updateNoteHandler,
 }) {
 	const { title, tag, priority, cardColor, isEdit, _id } = formData;
-	const isBodyEmpty = editorState.getCurrentContent().getPlainText().trim().length === 0;
+	const isBodyEmpty = editorState.getCurrentContent().getPlainText().length === 0;
 	const canSubmit = !isBodyEmpty && title.trim().length > 0;
 	return (
 		<div style={{ backgroundColor: cardColor }} className='my-editor modal-card'>

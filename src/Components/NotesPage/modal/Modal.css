@@ -85,3 +85,20 @@
 	padding: 1rem 0;
 	color: var(--colour-text-white);
 }
+
+.my-editor .rdw-image-modal {
+	background-color: var(--colour-black-third);
+}
+
+.my-editor .rdw-link-modal {
+	background-color: var(--colour-black-third);
+}
+
+.rdw-editor-main a {
+	color: var(--colour-secondary);
+	text-decoration: underline;
+}
+
+.rdw-editor-main a:hover {
+	color: var(--colour-primary);
+}

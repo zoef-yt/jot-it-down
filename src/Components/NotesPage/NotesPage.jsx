@@ -143,7 +143,7 @@ const getDataBySearch = (searchedWord, data) => {
 		? data.filter(
 				(note) =>
 					note.title.trim().toLowerCase().includes(searchedWord.trim().toLowerCase()) ||
-					note.body.trim().toLowerCase().includes(searchedWord.trim().toLowerCase()),
+					note.body.toLowerCase().includes(searchedWord.toLowerCase()),
 		  )
 		: data;
 };
