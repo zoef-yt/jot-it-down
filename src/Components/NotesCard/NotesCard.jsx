@@ -47,7 +47,7 @@ const NotesCard = ({ note, isHomePage = false, isArchive = false, isTrash = fals
 				<div className='notes-card-tags'>{tag !== 'None' && `#${tag}`}</div>
 			</div>
 			<hr />
-			<div style={{ width: '100%' }} className=' rdw-editor-main' dangerouslySetInnerHTML={{ __html: body }}></div>
+			<div className='rdw-editor-main width-100' dangerouslySetInnerHTML={{ __html: body }}></div>
 
 			<div className='flex-row space-between width-100 align-items-center'>
 				<p className='text-small text-grey'>{date}</p>

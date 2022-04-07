@@ -83,7 +83,7 @@ const NotesPage = () => {
 	useEffect(() => {
 		setFormData({ ...formData, body: draftToHtml(convertToRaw(editorState.getCurrentContent())) });
 	}, [editorState]);
-
+	const filteredData = getFilterData(filterState);
 	return (
 		<>
 			<div className='notes-body'>
@@ -107,8 +107,8 @@ const NotesPage = () => {
 					</Modal>
 
 					{notes.length > 0 ? (
-						getFilterData(filterState).length > 0 ? (
-							getFilterData(filterState).map((note) => {
+						filteredData.length > 0 ? (
+							filteredData.map((note) => {
 								return <NotesCard note={note} editNoteHandler={editNoteHandler} key={note._id} isHomePage={true} />;
 							})
 						) : (
@@ -139,5 +139,11 @@ const getDataByPriority = (selectedPriority, data) =>
 	selectedPriority !== '' && selectedPriority !== 'All' ? data.filter((note) => note.priority == selectedPriority) : data;
 
 const getDataBySearch = (searchedWord, data) => {
-	return searchedWord !== null && searchedWord !== '' ? data.filter((note) => note.title.toLowerCase().includes(searchedWord.toLowerCase())) : data;
+	return searchedWord !== null && searchedWord !== ''
+		? data.filter(
+				(note) =>
+					note.title.trim().toLowerCase().includes(searchedWord.trim().toLowerCase()) ||
+					note.body.trim().toLowerCase().includes(searchedWord.trim().toLowerCase()),
+		  )
+		: data;
 };
